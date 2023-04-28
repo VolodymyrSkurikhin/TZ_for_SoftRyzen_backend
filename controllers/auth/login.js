@@ -14,15 +14,12 @@ const login = async (req, res) => {
   if (!isCorrectPassword) {
     throw RequestError(401, "Email or password is wrong");
   }
-  if (!user.verify) {
-    throw RequestError(400, "Email was not verified");
-  }
   const payload = { id: user._id };
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "24h" });
   await User.findByIdAndUpdate(user._id, { token });
   res.json({
     token,
-    user: { user: user.email, subscription: user.subscription },
+    user: { user: user.email },
   });
 };
 

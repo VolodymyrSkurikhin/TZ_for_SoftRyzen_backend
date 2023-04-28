@@ -1,8 +1,8 @@
-const { Contact } = require("../../models/contact");
+const { Movie } = require("../../models/movies");
 
 const add = async (req, res) => {
   const { _id: owner } = req.user;
-  const newEntry = await Contact.create({ ...req.body, owner });
+  const newEntry = await Movie.create({ ...req.body, owner });
   res.status(201).json(newEntry);
 };
 
