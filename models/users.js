@@ -6,6 +6,11 @@ const emailRegexp = /^[\w.]+@[\w]+.[\w]+$/;
 
 const userDBShema = new Schema(
   {
+    username: {
+      type: String,
+      required: [true, "Username is required"],
+      unique: true,
+    },
     password: {
       type: String,
       required: [true, "Password is required"],

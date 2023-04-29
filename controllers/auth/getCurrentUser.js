@@ -7,7 +7,7 @@ const getCurrentUser = async (req, res) => {
   if (!user) {
     throw RequestError(401, "Not authorized");
   }
-  res.json({ email: user.email });
+  res.json({ email: user.email, username: user.username });
 };
 
 module.exports = getCurrentUser;
