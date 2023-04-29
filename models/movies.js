@@ -1,5 +1,7 @@
 const { Schema, model } = require("mongoose");
-const Joi = require("joi");
+const DateExtension = require("@joi/date");
+const JoiImport = require("joi");
+const Joi = JoiImport.extend(DateExtension);
 const { handleSchemaValidationErrors } = require("../helpers");
 
 const movieDBSchema = new Schema(
@@ -29,7 +31,7 @@ movieDBSchema.post("save", handleSchemaValidationErrors);
 const movieSchema = Joi.object({
   title: Joi.string().required(),
   director: Joi.string().required(),
-  date: Joi.string().required(),
+  date: Joi.date().format("DD-MM-YYYY").less("now").raw().required(),
 });
 
 const Movie = model("movie", movieDBSchema);

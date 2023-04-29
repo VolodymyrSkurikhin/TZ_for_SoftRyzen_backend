@@ -5,10 +5,10 @@ const getAll = async (req, res) => {
   const { page = 1, limit = 3 } = req.query;
   const skip = (page - 1) * limit;
   const filter = { owner };
-  const result = await Movie.find(filter, "-createdAt -updatedAt", {
+  const result = await Movie.find(filter, "", {
     skip,
     limit: Number(limit),
-  }).populate("owner", "email");
+  });
   res.json(result);
 };
 
