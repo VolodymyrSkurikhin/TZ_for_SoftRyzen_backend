@@ -1,10 +1,10 @@
 const { isValidObjectId } = require("mongoose");
 const { RequestError } = require("../helpers");
 
-const isValidId = (req, _, next) => {
-  const { movieId } = req.params;
-  if (!isValidObjectId(movieId)) {
-    const error = RequestError(400, `${movieId} is not valid`);
+const isValidId = (idName) => (req, _, next) => {
+  const idValue = req.params[idName];
+  if (!isValidObjectId(idValue)) {
+    const error = RequestError(400, `${idValue} is not valid`);
     next(error);
   }
   next();

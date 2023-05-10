@@ -17,11 +17,21 @@ const router = express.Router();
 
 router.get("/", authenticate, cntrWrapper(getAll));
 
-router.get("/:movieId", authenticate, isValidId, cntrWrapper(getById));
+router.get(
+  "/:movieId",
+  authenticate,
+  isValidId("movieId"),
+  cntrWrapper(getById)
+);
 
 router.post("/", authenticate, validator(movieSchema), cntrWrapper(add));
 
-router.delete("/:movieId", authenticate, isValidId, cntrWrapper(removeById));
+router.delete(
+  "/:movieId",
+  authenticate,
+  isValidId("movieId"),
+  cntrWrapper(removeById)
+);
 
 router.put(
   "/:movieId",

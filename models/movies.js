@@ -15,7 +15,8 @@ const movieDBSchema = new Schema(
       required: [true, "Set director's name for movie"],
     },
     date: {
-      type: String,
+      type: Date,
+      validator: (value) => value < new Date(),
       required: [true, "Set release date for movie"],
     },
     owner: {
@@ -31,7 +32,7 @@ movieDBSchema.post("save", handleSchemaValidationErrors);
 const movieSchema = Joi.object({
   title: Joi.string().required(),
   director: Joi.string().required(),
-  date: Joi.date().format("DD-MM-YYYY").less("now").raw().required(),
+  date: Joi.date().format("DD-MM-YYYY").less("now").required(),
 });
 
 const Movie = model("movie", movieDBSchema);

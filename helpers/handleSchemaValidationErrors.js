@@ -6,7 +6,7 @@ const handleSchemaValidationErrors = (error, _, next) => {
   } else {
     error.status = 400;
   }
-  next(error);
+  next();
 };
 
 module.exports = handleSchemaValidationErrors;
